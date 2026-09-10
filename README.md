@@ -80,27 +80,35 @@ The MCU/control schematic and most of the embedded firmware were primarily devel
 The prototype combines two main electrical power domains with embedded control and a fluid-handling path.
 
 ```text
-                 USB-C 5 V
-                     │
-                     ▼
-              Battery Charging
-                     │
-                 1S Li-ion
-                     │
-            ┌────────┴────────┐
-            │                 │
-            ▼                 ▼
-       Logic Supply       12 V Boost
-            │                 │
-            ▼                 ▼
-     STM32 + Display         Pump
-            │                 │
-     Encoder / Button         │
-            │                 ▼
-            └──── Control ──► Fluid Path
-                              │
-                              ▼
-                     Removable Container
+Power Path
+----------
+
+USB-C 5 V
+    │
+    ▼
+Battery Charging
+    │
+    ▼
+1S Li-ion
+    │
+    ├────────────► Logic Supply ─────────► STM32 + Display
+    │
+    └────────────► 12 V Boost ───────────► Pump Power
+
+
+Control & Monitoring
+--------------------
+
+Encoder / Button ─────────► STM32
+Battery Monitor ──────────► STM32
+STM32 ────────────────────► Pump Control ─────► Pump
+Pump Power ───────────────────────────────────► Pump
+                                                │
+                                                ▼
+                                           Fluid Path
+                                                │
+                                                ▼
+                                       Removable Container
 ```
 
 Battery state is monitored electrically and communicated to the control system, while the higher-voltage pump rail is generated separately from the logic supply.
@@ -215,6 +223,10 @@ The exploded assembly drawing documents the relationship between the enclosure, 
 [View full exploded assembly drawing (PDF)](mechanical/assembly-exploded.pdf)
 
 A second drawing documents the completed assembly and overall component relationship:
+
+<p align="center">
+  <img src="mechanical/assembly-overview.png" width="760" alt="Cocktail machine assembly overview">
+</p>
 
 [View assembly overview (PDF)](mechanical/assembly-overview.pdf)
 
