@@ -4,19 +4,20 @@
   <img src="images/hero.png" width="460" alt="Portable cocktail machine prototype">
 </p>
 
-A portable battery-powered cocktail-mixing prototype integrating custom power electronics, pump-driven fluid handling, embedded control, a rotary/LCD user interface, and a multi-part FDM-printed mechanical enclosure.
+A portable battery-powered cocktail-mixing prototype integrating power electronics, pump-driven fluid handling, embedded control, a rotary/LCD user interface, and a multi-part FDM-printed mechanical enclosure.
 
-The project focused on packaging electrical, mechanical, and fluid-handling subsystems into a compact physical prototype while progressing from system architecture and subsystem testing through CAD design, assembly, and integration.
+The project focused on packaging electrical, mechanical, and fluid-handling subsystems into a compact physical prototype, progressing from system architecture and subsystem testing through CAD design, assembly, and system integration.
 
 **Project period:** Fall 2025  
 **Institution:** Brown University  
-**Project type:** 4-person graduate engineering team project
+**Course:** ENGN 1650 Undergraduate Capstone  
+**Team:** 4-person team — 3 graduate students and 1 undergraduate student
 
 ---
 
 ## Project Goal
 
-The project explored how a portable cocktail-mixing device could combine fluid handling, embedded electronics, battery power, and a user interface within a single handheld form factor.
+The project explored how a portable cocktail-mixing device could combine fluid handling, embedded electronics, battery power, and a user interface within a compact physical product.
 
 The prototype incorporated:
 
@@ -28,49 +29,55 @@ The prototype incorporated:
 - a removable liquid container;
 - a custom multi-part enclosure designed for FDM fabrication.
 
-The goal was to move beyond a conceptual product model and develop a physically integrated prototype in which the electrical and mechanical subsystems could be assembled and tested together.
+The goal was to move beyond a conceptual product model and develop a physically integrated prototype in which the electrical, mechanical, and fluid-handling subsystems could be assembled and tested together.
 
 ---
 
 ## Highlights
 
 - **1S Li-ion battery-powered architecture**
-- USB-C 5-V power input and battery charging
-- Dedicated regulated logic supply
-- **12-V boost rail** for pump operation
+- USB-C 5 V power input and battery charging
+- Dedicated regulated logic power
+- **12 V boost rail** for pump operation
 - MAX17048 battery monitoring
 - STM32L412C8T6-based control architecture
 - LCD + rotary encoder / button interface
-- Pump control through MOSFET switching
+- MOSFET-based pump control
 - Full Fusion 360 mechanical assembly
 - Custom FDM-printable threaded container interface
 - Dedicated PCB, pump, and LCD mounting features
-- Detailed mechanical assembly and part drawings
-- Bench pump testing and full physical prototype assembly
+- Detailed mechanical part and assembly drawings
+- Bench pump testing and complete physical prototype assembly
 
 ---
 
 ## My Contributions
 
-My primary ownership was in the **power electronics, mechanical design, prototype integration, and team coordination** portions of the project.
+My primary work focused on **power electronics, mechanical design, prototype integration, and team coordination**.
 
 - Led the four-person team through design reviews, subsystem development, and prototype integration.
-- Co-developed the overall electrical schematic and owned the power-management section.
-- Designed the 1S Li-ion power architecture, including USB-C input, battery charging, logic power regulation, 12-V pump power conversion, and battery monitoring.
-- Designed the complete mechanical enclosure and assembly in Fusion 360.
+- Co-developed the overall system schematic, with primary ownership of the power-management section.
+- Designed the 1S Li-ion power architecture, including USB-C input, battery charging, regulated logic power, 12 V pump power conversion, and battery monitoring.
+- Independently designed the complete mechanical enclosure and assembly in Fusion 360.
 - Developed custom FDM-printable threaded interfaces and mechanical clearances for the removable container.
 - Designed dedicated mounting structures for the PCB, pump, LCD, and enclosure components.
 - Produced detailed mechanical part and assembly drawings.
 - Coordinated electrical, firmware, and mechanical integration toward the completed physical prototype.
 - Supported subsystem testing and final prototype assembly.
 
-> **Contribution boundary:** The MCU/control schematic and most of the embedded firmware were primarily developed by teammates. The PCB layout shown in this repository was not completed or fabricated and is included only as work-in-progress design documentation.
+### Team Collaboration
+
+The project was developed collaboratively across electrical, firmware, and mechanical work.
+
+Within the shared system design, I owned the power-management section of the schematic and independently developed the mechanical enclosure and assembly. I also led system-level integration and team coordination.
+
+The MCU/control schematic and most of the embedded firmware were primarily developed by other team members. They are included in this repository only where useful for documenting the architecture and integration of the complete system.
 
 ---
 
 ## System Architecture
 
-The prototype combines two main electrical power domains with an embedded control and fluid-handling path.
+The prototype combines two main electrical power domains with embedded control and a fluid-handling path.
 
 ```text
                  USB-C 5 V
@@ -83,7 +90,7 @@ The prototype combines two main electrical power domains with an embedded contro
             ┌────────┴────────┐
             │                 │
             ▼                 ▼
-       Logic Supply       12-V Boost
+       Logic Supply       12 V Boost
             │                 │
             ▼                 ▼
      STM32 + Display         Pump
@@ -98,7 +105,7 @@ The prototype combines two main electrical power domains with an embedded contro
 
 Battery state is monitored electrically and communicated to the control system, while the higher-voltage pump rail is generated separately from the logic supply.
 
-The resulting architecture allowed low-voltage embedded electronics and the higher-power pump subsystem to operate from the same portable battery source.
+This architecture allows the low-voltage embedded electronics and the pump subsystem to operate from the same portable single-cell battery source.
 
 ---
 
@@ -110,7 +117,7 @@ The resulting architecture allowed low-voltage embedded electronics and the high
   <img src="electrical/power-schematic.png" width="900" alt="Cocktail machine power-management schematic">
 </p>
 
-My primary electrical contribution was the power-management schematic.
+The power-management schematic was my primary electrical design contribution.
 
 The design includes:
 
@@ -126,7 +133,7 @@ The design includes:
 
 The power architecture separates the low-voltage logic domain from the pump supply while allowing both to operate from the same single-cell battery.
 
-The charging section accepts 5-V input through USB-C and charges the 1S Li-ion battery. The battery rail then feeds the logic-power and pump-power conversion stages.
+The charging section accepts 5 V through USB-C and charges the 1S Li-ion battery. The battery rail then feeds the logic-power and pump-power conversion stages.
 
 ---
 
@@ -146,7 +153,9 @@ The control side of the system includes:
 - I2C connection to the battery-monitoring circuit
 - pump MOSFET control
 
-> **Team contribution note:** This MCU/control schematic was primarily developed by my teammate and is shown here to document the architecture of the complete system. My electrical ownership was concentrated on the power-management design shown above.
+This schematic is shown to provide context for the complete electrical architecture and its interaction with the power-management section.
+
+The MCU/control circuitry and most embedded firmware were primarily developed by other team members as part of the shared system design.
 
 ---
 
@@ -231,7 +240,7 @@ The mechanical drawing specifies:
 | Effective thread length | 10 mm |
 | Radial clearance | 0.3 mm |
 
-The clearance and relatively coarse thread geometry were selected to make the connection practical to prototype using FDM printing rather than relying on a fine production-machined thread.
+The clearance and relatively coarse thread geometry were selected to make the connection practical to prototype using FDM printing rather than relying on fine production-machined thread geometry.
 
 <p align="center">
   <img src="mechanical/container-thread.png" width="760" alt="Container and custom thread engineering drawing">
@@ -243,7 +252,7 @@ The clearance and relatively coarse thread geometry were selected to make the co
 
 ### Enclosure & Component Mounting
 
-The main enclosure was divided into multiple printable parts so that internal components could be installed and serviced during prototype assembly.
+The main enclosure was divided into multiple printable parts so that internal components could be installed and accessed during prototype assembly.
 
 <p align="center">
   <img src="images/prototype-side.png" width="440" alt="Side view of portable cocktail machine prototype">
@@ -274,9 +283,9 @@ Detailed drawings are available for the primary enclosure components:
 
 The upper enclosure integrates the display and rotary control into the physical product form.
 
-The interface design required the mechanical CAD to account for component positioning, external access, fastening, and clearances while preserving the overall enclosure shape.
+The mechanical CAD had to account for component positioning, external access, fastening, and clearances while preserving the overall enclosure geometry.
 
-The control interface was therefore treated as an electromechanical integration problem rather than as an isolated cosmetic feature.
+The user interface was therefore treated as an electromechanical integration problem rather than as an isolated cosmetic feature.
 
 ---
 
@@ -288,9 +297,9 @@ The project progressed through subsystem testing before full mechanical integrat
 
 [▶ Watch pump subsystem test](demo/pump-test.mov)
 
-The pump was tested separately as part of the fluid-handling development before integration into the final enclosure.
+The pump and liquid-transfer path were tested separately before integration into the final enclosure.
 
-This provided an early functional check of the pump and liquid-transfer subsystem independent of the complete mechanical assembly.
+This provided an early functional check of the fluid-handling subsystem independent of the complete mechanical assembly.
 
 ### Assembly Demonstration
 
@@ -298,7 +307,7 @@ This provided an early functional check of the pump and liquid-transfer subsyste
 
 The assembly demonstration shows the physical integration of the enclosure components and internal hardware into the completed prototype.
 
-The final build combined:
+The final physical build brought together:
 
 - the FDM-printed enclosure;
 - removable container;
@@ -324,7 +333,7 @@ A future revision could complete the layout, perform DRC review, fabricate the b
 
 Features such as the removable-container thread cannot simply reproduce fine machined-thread geometry.
 
-The prototype used a relatively coarse **3-mm thread pitch** and **0.3-mm radial clearance** to create a more printable and assembleable interface.
+The prototype used a relatively coarse **3 mm thread pitch** and **0.3 mm radial clearance** to create a more printable and assembleable interface.
 
 This reinforced the importance of designing mechanical features around the manufacturing process rather than only around ideal CAD geometry.
 
@@ -342,7 +351,7 @@ The preserved project evidence includes schematic development, pump subsystem te
 
 It does not represent a production-qualified product or a completed reliability-validation program.
 
-The project is presented here as an integrated engineering prototype and design case study.
+The project is presented here as an integrated engineering prototype and system-development case study.
 
 ---
 
@@ -363,7 +372,7 @@ The following materials are intentionally not published:
 
 - the complete Altium project;
 - complete Fusion 360 / CAD source files;
-- manufacturing files for an unfinished PCB;
+- manufacturing files for the unfinished PCB;
 - teammate-developed firmware source;
 - complete course-development archives;
 - third-party libraries and reference files.
@@ -374,6 +383,8 @@ The published material is intended to demonstrate the project's power-electronic
 
 ## Acknowledgments
 
-This project was developed at **Brown University** as a four-person engineering team project.
+This project was developed at **Brown University** as part of the **ENGN 1650 Undergraduate Capstone**.
 
-I am grateful to my teammates for their work on the MCU/control electronics, embedded firmware, and other parts of the integrated prototype.
+The four-person team consisted of **three graduate students and one undergraduate student**.
+
+I am grateful to my teammates for their contributions to the MCU/control electronics, embedded firmware, and other parts of the integrated prototype.
